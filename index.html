@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .product {
+            width: 25%;
+            display: inline-block;
+            margin: 1%;
+            padding: 1%;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .product h3 {
+            margin-bottom: 5px;
+        }
+
+        .product p {
+            margin-bottom: 10px;
+        }
+
+        .product .buy-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            border: 1px solid #ecdfdf;
+        }
+
+        .item-name {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .col-md-4 {
+            padding: 10px;
+            background-color: #f2f2f2;
+            margin-bottom: 10px;
+        }
+
+        .col-md-8 {
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <script>
+        var productClass = "product";
+        var buyButtonClass = "buy-button";
+
+        var products = [
+            { name: "Badminton", image: "badminton.jpg", price: 100.00 },
+            { name: "Ball", image: "ball.jpg", price: 60.00 },
+            { name: "Sports Shoe", image: "sports shoe.jpg", price: 600.00 },
+            { name: "bat", image: "bat.png", price: 800.0 },
+            { name: "rack", image: "rack.png", price: 400.00 },
+            { name: "volleyballnet", image: "volleyballnet.png", price: 300.00 },
+            { name: "stackable", image: "stackable.jpg", price: 200.00 },
+            { name: "volleyball", image: "volleyball.png", price: 450.0 },
+            { name: "waterbottle", image: "waterbottle.png", price: 320.0 },
+            // Add more products as needed
+        ];
+
+        function generateProductHTML(name, image, price) {
+            return `
+                <div class="${productClass}" onclick="showModal('${name}', 'item added to cart', '${price}')">
+                    <img src="${image}" alt="${name}">
+                    <h3>${name}</h3>
+                    <p>Price: Rs${price.toFixed(2)}</p>
+                    <a href="#" class="${buyButtonClass}" onclick="addToCart('${name}', ${price})">Buy</a>
+                </div>
+            `;
+        }
+
+        function generateProductList() {
+            var productListHTML = '';
+            for (var i = 0; i < products.length; i++) {
+                var product = products[i];
+                productListHTML += generateProductHTML(product.name, product.image, product.price);
+            }
+            return productListHTML;
+        }
+    </script>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Product List</h1>
+
+            <script>
+                document.write(generateProductList());
+            </script>
+
+        </div>
+        <div class="col-md-4">
+            <h2>Cart</h2>
+            <h2>Total Amount: Rs<span id="total-amount">0.00</span></h2>
+            <ul id="cart-items"></ul>
+            <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="product-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="product-modal-title"></h4>
+                </div>
+                <div class="modal-body" id="product-modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="overflow: hidden;">
+        <!-- Content -->
+    </div>
+    <div class="no-scroll">
+        <!-- Content -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        var cartItems = [];
+
+        function showModal(title, item, price) {
+            $('#product-modal-title').text(title);
+            $('#product-modal-body').html('<p>Item: ' + item + '</p><p>Price: Rs' + price + '</p>');
+            $('#product-modal').modal('show');
+        }
+
+        function addToCart(productName) {
+            cartItems.push(productName);
+            refreshCartItems();
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            refreshCartItems();
+        }
+
+        function refreshCartItems() {
+            var cartItemsElement = $('#cart-items');
+            cartItemsElement.empty();
+
+            for (var i = 0; i < cartItems.length; i++) {
+                var listItem = $('<li>').text(cartItems[i]);
+                var removeButton = $('<button>').text('Remove').addClass('btn btn-xs btn-danger').attr('onclick', 'removeFromCart(' + i + ')');
+                listItem.append(removeButton);
+                cartItemsElement.append(listItem);
+            }
+        }
+        var cartItems = [];
+        var totalAmount = 0;
+
+        function showModal(title, item, price) {
+            // ...
+        }
+
+        function addToCart(productName, price) {
+            cartItems.push({ name: productName, price: price });
+            totalAmount += price;
+            refreshCartItems();
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            totalAmount -= cartItems[index].price;
+            refreshCartItems();
+        }
+
+
+        function refreshCartItems() {
+            var cartItemsElement = $('#cart-items');
+            cartItemsElement.empty();
+
+            for (var i = 0; i < cartItems.length; i++) {
+                var listItem = $('<li>').addClass('cart-item');
+                var itemName = $('<span>').text(cartItems[i].name).addClass('item-name');
+                var removeButton = $('<button>').html('&times;').addClass('btn btn-xs btn-danger').attr('onclick', 'removeFromCart(' + i + ')');
+
+                listItem.append(itemName);
+                listItem.append(removeButton);
+                cartItemsElement.append(listItem);
+            }
+
+            $('#total-amount').text(totalAmount.toFixed(2));
+        }
+
+
+        function clearCart() {
+            cartItems = [];
+            totalAmount = 0;
+            refreshCartItems();
+        }
+
+
+        function clearCart() {
+            cartItems = [];
+            refreshCartItems();
+        }
+    </script>
+</body>
+
+</html>
