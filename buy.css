@@ -1,0 +1,26 @@
+body {
+    
+    background-color: rgb(205, 166, 243);
+  }
+#details {
+  padding: 10px;
+  background-color: #70d4ef;
+  margin-top: 100px;
+  margin-right: 100px;
+  border-radius: 5px;
+  width: 340px;
+  text-align: center;
+  position: fixed;
+  top:0;
+  right: 0;
+}
+  
+
+
+#CheckItem {
+  text-align: center;
+}
+
+.product {
+  background-color: bisque;
+}

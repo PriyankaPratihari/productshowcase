@@ -7,18 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body style="overflow-x: hidden;">
     <div class="row">
         <div class="col-md-8">
-            <h1>Product List</h1>
+            <h1 ><b>PRODUCT LIST</b></h1>
             <div id="product-list"></div>
         </div>
-        <div class="col-md-4">
-            <h2>Cart</h2>
+        <div class="col-md-4" id="productdiv">
+            <h2><b>CART</b></h2>
+            <hr/>
             <h2>Total Amount: Rs<span id="total-amount">0.00</span></h2>
-            <ul id="cart-items" ></ul>
+            <ul id="cart-items"></ul>
             <button type="button" class="btn btn-danger" onclick="clearCart()">Clear Cart</button>
+            <button type="button" class="btn btn-primary" onclick="buyItems()">Buy</button>
         </div>
+        
     </div>
 
     <!-- Modal -->
@@ -29,6 +32,9 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title" id="product-modal-title"></h4>
+                    <a href="#" class="${buyButtonClass}" onclick="showModal('${name}', 'Item added to cart', ${price})">Buy</a>
+                <h4 class="modal-title" id="product-modal-title"></h4>
+                <div class="modal-body" id="product-modal-body"></div>
                 </div>
                 <div class="modal-body" id="product-modal-body"></div>
                 <div class="modal-footer">

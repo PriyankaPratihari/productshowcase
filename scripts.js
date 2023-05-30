@@ -38,11 +38,11 @@ var cartItems = [];
 var totalAmount = 0;
 
 function showModal(title, item, price) {
-    // ...
+
 }
 
-function addToCart(productName, price) {
-    cartItems.push({ name: productName, price: price });
+function addToCart(products, price) {
+    cartItems.push({ name: products, price: price });
     totalAmount += price;
     refreshCartItems();
 }
@@ -77,6 +77,32 @@ function clearCart() {
     totalAmount = 0;
     refreshCartItems();
 }
+
+function buyItems() {
+    // Create an array to hold the product items and prices
+    var items = [];
+
+    // Populate the array with the cart items
+    for (var i = 0; i < cartItems.length; i++) {
+        var cartItem = cartItems[i];
+        // Retrieve the corresponding product from the products array
+        var product = products.find(function(item) {
+            return item.name === cartItem.name;
+        });
+        // Push the product item with additional image property to the items array
+        items.push({ name: cartItem.name, price: cartItem.price, image: product.image });
+    }
+
+    // Convert the items array to a JSON string
+    var itemsJson = JSON.stringify(items);
+
+    // Construct the URL with the query parameter
+    var url = "buy.html?items=" + encodeURIComponent(itemsJson);
+
+    // Navigate to the checkout page
+    window.location.href = url;
+}
+
 
 $(document).ready(function() {
     $('#product-list').html(generateProductList());
