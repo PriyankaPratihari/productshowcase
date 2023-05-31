@@ -101,8 +101,44 @@ function buyItems() {
 
     // Navigate to the checkout page
     window.location.href = url;
-}
+    
 
+
+}
+function completePayment() {
+    // Perform the payment processing here
+    alert('Payment completed successfully!');
+    const paymentOptions = document.getElementById('payment');
+    paymentOptions.style.display = 'none';
+    cartItems = []; // Clear the cart after successful payment
+    totalAmount = 0;
+    refreshCartItems(); // Update the cart UI
+    address();
+  
+  }
+function showPaymt() {
+    const paymentOptions = document.getElementById('payment');
+    paymentOptions.style.display = 'block';
+}
+function address() {
+    // Perform the payment processing here
+  
+    const paymentOptions = document.getElementById('Address');
+    paymentOptions.style.display = 'none';
+    completePayment(); // Update the cart UI
+  
+  }
+function address() {
+    const paymentOptions = document.getElementById('Address');
+    paymentOptions.style.display = 'block';
+}
+function placeOrder() {
+    var address = document.getElementById('Address').value;
+    alert('address added  successfully!');
+    const paymentOptions = document.getElementById('Address');
+    paymentOptions.style.display = 'none';
+    address();
+}
 
 $(document).ready(function() {
     $('#product-list').html(generateProductList());

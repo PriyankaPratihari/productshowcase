@@ -67,6 +67,32 @@ body {
     color: black;
     
 }
+.payment {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: fixed;
+    top: 100px;
+    right: 240px;
+  }
+  
+  .payment h2 {
+    margin-top: 0;
+  }
+  .address {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: fixed;
+    top: 100px;
+    right: 240px;
+  }
+  
+  .address h2 {
+    margin-top: 0;
+  }
 
 @media (max-width: 768px) {
     .product {

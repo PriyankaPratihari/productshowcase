@@ -1,7 +1,7 @@
 body {
-    
-    background-color: rgb(205, 166, 243);
-  }
+  background-color: rgb(205, 166, 243);
+}
+
 #details {
   padding: 10px;
   background-color: #70d4ef;
@@ -11,11 +11,9 @@ body {
   width: 340px;
   text-align: center;
   position: fixed;
-  top:0;
+  top: 0;
   right: 0;
 }
-  
-
 
 #CheckItem {
   text-align: center;
@@ -23,4 +21,13 @@ body {
 
 .product {
   background-color: bisque;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  background-color: bisque;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
